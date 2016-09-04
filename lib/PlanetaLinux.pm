@@ -45,6 +45,8 @@ sub new {
 sub is_country_supported {
     my($self) = shift;
     
+    return 1 if $self->country eq 'rssall';
+    
     unless ( $self->{_supported_countries} ) {
         $self->{_supported_countries} = { map { $_ => 1 } @countries };
     }
@@ -80,17 +82,23 @@ sub country_name {
 
 sub run {
     my($self) = shift;
-    my @countries = @_ || @{ $self->{countries} };
+    my @countries = @_ || @{ $self->{countries} || ['rssall'] };
     
     for my $c ( @countries ) {
         # generate template
         $self->country($c);
-        
+
         croak "No instance found for $c"
             unless $self->is_country_supported;
         
         my $template = $self->template;
-        my $ini = $self->feeds({country => $self->country})->by_country->ini({tmp_template => $template});
+        
+        my $ini;
+        if ($self->country() eq 'rssall') {
+            $ini = $self->feeds({country => $self->country})->ini({tmp_template => $template});
+        } else {
+            $ini = $self->feeds({country => $self->country})->by_country->ini({tmp_template => $template});
+        }
         my $dir = dirname(__FILE__).'/../';
         
         mkdir "$dir/cache/$c";

@@ -36,6 +36,15 @@ for my $c_id ( @PlanetaLinux::countries ) {
 		
 }
 
+task 'rssall',
+    "Builds a single RSS for all authors.",
+    sub {
+        say "running rssall!";
+        my $p = PlanetaLinux->new();
+        $p->run();
+        say 'Done?';
+    };
+
 task 'all',
 	"Builds all Planeta Linux instances.",
 	sub {

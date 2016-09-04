@@ -1,0 +1,11 @@
+--- 
+countries: 
+  - mx
+email: el_intermediario@slackware.mx
+enabled: 'on'
+filename: slackware_mexico.yml
+message: ~
+name: Slackware México
+portal: 1
+twitter: ~
+url: http://slackware.mx/feed/
