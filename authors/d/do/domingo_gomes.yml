@@ -2,7 +2,7 @@
 countries: 
   - es
 email: domingogomes@newesc.com
-enabled: 'on'
+enabled: 'off'
 filename: domingo_gomes
 message: ~
 name: "Domingo Gomes"
